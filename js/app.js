@@ -1,7 +1,7 @@
 // Подписываемся на событие
 document.querySelector('#loan-form').addEventListener('submit', function (e) {
-	document.querySelector('#results').style.display = "none";
-	document.querySelector('#loading').style.display = "block";
+	document.querySelector('#results').style.display = 'none';
+	document.querySelector('#loading').style.display = 'block';
 
 	setTimeout(calculateResults, 2000);
 
@@ -38,6 +38,7 @@ function calculateResults() {
 		document.querySelector('#loading').style.display = "none";
 	} else {
 		showError("Пожалуйста, проверьте введенные данные!");
+		console.log(showError);
 	}
 }
 
@@ -45,23 +46,27 @@ function calculateResults() {
 function showError(error) {
 	document.querySelector('#results').style.display = 'none';
 	document.querySelector('#loading').style.display = 'none';
+
+
+	// Создаем 'div' для сщщбщения об ошибке
+	const errorDiv = document.createElement('div');
+
+	//Получаем элементы
+	const card = document.querySelector('.card');
+	const heading = document.querySelector('.heading');
+
+	//Добавляем класс в блок сообщений об ошибках
+	errorDiv.className = 'alert alert-danger';
+
+	//Создаем nextnode и добавляем его в 'div';
+	errorDiv.appendChild(document.createTextNode(error));
+
+	//Вставляем сообщение об ошибке над заголовком
+	card.insertBefore(errorDiv, heading);
+
+	//Очистить сообщение об ошибке через 3 секунды
+	setTimeout(clearError, 4000);
 }
-
-// Создаем 'div' для сщщбщения об ошибке
-const errorDiv = document.createElement('div');
-
-//Получаем элементы
-const card = document.querySelector('.card');
-const heading = document.querySelector('heading');
-
-//Добавляем класс в блок сообщений об ошибках
-errorDiv.className = 'alert alert-danger';
-
-//Создаем nextnode и добавляем его в 'div';
-errorDiv.appendChild(document.createTextNode(error));
-
-//Вставляем сообщение об ошибке через 3 секунды
-setTimeout(clearError, 4000);
 
 //Очистить сообщение об ошибке
 function clearError() {
